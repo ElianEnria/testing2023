@@ -2,8 +2,10 @@ package com.testing2023.grupo1.Controller;
 
 import com.testing2023.grupo1.Entity.Task;
 import com.testing2023.grupo1.Service.TaskService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -22,8 +24,9 @@ public class TaskController {
     }
 
     @PostMapping
-    public Task createTask(@RequestBody Task task) {
-        return taskService.createTask(task);
+    public ResponseEntity<Task> create(@RequestBody Task task) {
+        Task newTask = taskService.create(task);
+        return ResponseEntity.created(URI.create("/tasks/" + newTask.getId())).body(newTask);
     }
 
     @PutMapping("/{id}")
@@ -36,3 +39,4 @@ public class TaskController {
         taskService.deleteTask(id);
     }
 }
+

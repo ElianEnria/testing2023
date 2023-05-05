@@ -10,8 +10,11 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public List<UserTask> getAllUsers() {
         return userRepository.findAll();
@@ -21,8 +24,12 @@ public class UserService {
         return userRepository.findById(userId).orElse(null);
     }
 
-    public UserTask createUser(UserTask userTask) {
-        return userRepository.save(userTask);
+    public UserTask createUser(UserTask user) {
+        UserTask existingUser = userRepository.findByUsername(user.getUsername());
+        if (existingUser != null) {
+            throw new RuntimeException("El usuario ingresado ya está registrado");
+        }
+        return userRepository.save(user);
     }
 
     public UserTask updateUser(Long userId, UserTask userTaskDetails) {
@@ -46,4 +53,3 @@ public class UserService {
         }
     }
 }
-

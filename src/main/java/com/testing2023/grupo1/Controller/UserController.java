@@ -2,8 +2,10 @@ package com.testing2023.grupo1.Controller;
 
 import com.testing2023.grupo1.Entity.UserTask;
 import com.testing2023.grupo1.Service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -32,7 +34,14 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    public boolean deleteUser(@PathVariable Long id) {
+        return userService.deleteUser(id);
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserTask> register(@RequestBody UserTask user) {
+        UserTask newUser = userService.createUser(user);
+        return ResponseEntity.created(URI.create("/users/" + newUser.getId())).body(newUser);
+    }
+
 }
