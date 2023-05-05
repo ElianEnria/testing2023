@@ -1,7 +1,7 @@
 package com.testing2023.grupo1.config;
 
 import com.testing2023.grupo1.Entity.Task;
-import com.testing2023.grupo1.Entity.UserTask;
+import com.testing2023.grupo1.Entity.User;
 import com.testing2023.grupo1.Repository.TaskRepository;
 import com.testing2023.grupo1.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +25,11 @@ public class TestDataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        UserTask userTask = new UserTask();
-        userTask.setId(1L);
-        userTask.setUsername("usuario");
-        userTask.setPassword("contraseña");
-        userRepository.save(userTask);
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("usuario");
+        user.setPassword("contraseña");
+        userRepository.save(user);
 
         Task task1 = new Task();
         task1.setId(1L);

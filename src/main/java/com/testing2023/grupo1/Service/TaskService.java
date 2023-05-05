@@ -12,11 +12,8 @@ import java.util.List;
 @Service
 public class TaskService {
 
-    private final TaskRepository taskRepository;
-
-    public TaskService(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-    }
+    @Autowired
+    private TaskRepository taskRepository;
 
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
@@ -27,12 +24,20 @@ public class TaskService {
     }
 
     public Task create(Task task) {
-        if (task.getDate().isBefore(LocalDate.now())) {
-            throw new RuntimeException("La fecha de la tarea debe ser mayor o igual a la fecha actual");
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+
+        if (task.getDate().isBefore(currentDate)) {
+            throw new RuntimeException("La fecha de la tarea debe ser posterior a la fecha actual");
+        } else if (task.getDate().equals(currentDate) && task.getTime().isBefore(currentTime)) {
+            throw new RuntimeException("La hora de la tarea debe ser posterior a la hora actual");
         }
-        if (task.getTime().isBefore(LocalTime.now())) {
-            throw new RuntimeException("La hora de la tarea debe ser mayor o igual a la hora actual");
-        }
+        /*
+        * verificamos si la fecha de la tarea es anterior a la fecha actual. Si es así, lanzamos una excepción.
+        * Si la fecha de la tarea es posterior o igual a la fecha actual, verificamos si la hora de la tarea es posterior a la hora actual.
+        * Si no es así, lanzamos otra excepción. S
+        * i la fecha y hora de la tarea son posteriores a la fecha y hora actual, guardamos la tarea en el repositorio y la devolvemos.
+        * */
         return taskRepository.save(task);
     }
 
