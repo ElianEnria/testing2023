@@ -28,8 +28,8 @@ public class TestDataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         User user = new User();
         user.setId(1L);
-        user.setUsername("usuario");
-        user.setPassword("contraseña");
+        user.setUsername("testing2023");
+        user.setPassword("Grupo1Testing2023");
         user = userRepository.save(user); // Guarda el usuario en la base de datos y actualiza su ID
 
         Task task1 = new Task();
@@ -50,5 +50,6 @@ public class TestDataInitializer implements CommandLineRunner {
         task2.setUser(user);
         taskRepository.save(task2);
     }
+
 
 }
