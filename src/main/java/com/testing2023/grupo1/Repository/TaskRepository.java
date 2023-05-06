@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
+    List<Task> findByUser(User user);
     List<Task> findByUserIdAndDateTimeGreaterThan(Long userId, Date dateTime);
     List<Task> findByUserAndDateTimeAfter(User user, LocalDateTime dateTime);
-
 }

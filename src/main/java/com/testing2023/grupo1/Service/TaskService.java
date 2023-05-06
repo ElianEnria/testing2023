@@ -42,18 +42,16 @@ public class TaskService {
         * */
 
         //modificaion nueva 06
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
+        LocalDateTime currentDateTime = LocalDateTime.now();
 
-        if (task.getDate().isBefore(currentDate)) {
-            throw new RuntimeException("La fecha de la tarea debe ser posterior a la fecha actual");
-        } else if (task.getDate().equals(currentDate) && task.getTime().isBefore(currentTime)) {
-            throw new RuntimeException("La hora de la tarea debe ser posterior a la hora actual");
+        if (task.getDateTime().isBefore(currentDateTime)) {
+            throw new RuntimeException("La fecha y hora de la tarea deben ser posteriores a la fecha y hora actual");
         } else if (task.getTitle() == null || task.getTitle().isEmpty()) {
             throw new RuntimeException("El título de la tarea es obligatorio");
         } else if (task.getDescription() == null || task.getDescription().isEmpty()) {
             throw new RuntimeException("La descripción de la tarea es obligatoria");
         }
+
 
         return taskRepository.save(task);
     }
@@ -70,8 +68,8 @@ public class TaskService {
         Task task = taskRepository.findById(taskId).orElse(null);
         if (task != null) {
             task.setTitle(taskDetails.getTitle());
-            task.setDate(taskDetails.getDate());
-            task.setTime(taskDetails.getTime());
+            task.setDateTime(taskDetails.getDateTime());
+            task.setDateTime(taskDetails.getDateTime());
             task.setDescription(taskDetails.getDescription());
             task.setIsDone(taskDetails.getIsDone());
             return taskRepository.save(task);
