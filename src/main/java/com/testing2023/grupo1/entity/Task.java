@@ -1,4 +1,4 @@
-package com.testing2023.grupo1.Entity;
+package com.testing2023.grupo1.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,9 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -20,13 +18,16 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-//    private LocalDate date;
-//    private LocalTime time;
     private LocalDateTime dateTime;
     private String description;
-    private Boolean isDone;
+    private Boolean isDone = false;
     @ManyToOne
     private User user;
 
-    // constructor, getters y setters
+    public Task(String title, LocalDateTime dateTime, String description, User user) {
+        this.title = title;
+        this.dateTime = dateTime;
+        this.description = description;
+        this.user = user;
+    }
 }
