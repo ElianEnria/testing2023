@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -23,6 +24,29 @@ public class User {
     private String password;
     @OneToMany(mappedBy = "user")
     private List<Task> tasks;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", tasks=" + tasks +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(tasks, user.tasks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, tasks);
+    }
 
     public User(String username, String password) {
         this.username = username;
