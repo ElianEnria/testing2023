@@ -1,7 +1,9 @@
 package com.testing2023.grupo1.util;
 
 import com.testing2023.grupo1.controller.requests.user.LoginRequest;
+import com.testing2023.grupo1.controller.requests.user.NewUserRequest;
 import com.testing2023.grupo1.controller.responses.user.LoginResponse;
+import com.testing2023.grupo1.controller.responses.user.SigninResponse;
 import com.testing2023.grupo1.entity.User;
 
 import java.util.ArrayList;
@@ -25,11 +27,11 @@ public class DataMock {
         List<User> userList = new ArrayList<>();
 
         userList.add(
-                new User("fedesan", "1234")
+                new User("Fedesan1234", "Fede12345")
         );
 
         userList.add(
-                new User("elian", "1234")
+                new User("Elian1234", "Elian12345")
         );
 
         return userList;
@@ -37,24 +39,36 @@ public class DataMock {
 
     public static User buildUser(){
         return new User(
-                "fedesan",
-                "1234"
+                "Fedesan1234",
+                "Fede12345"
         );
     }
 
     public static LoginResponse buildLoginResponse(){
         return new LoginResponse(
                 null,
-                "fedesan",
+                "Fedesan1234",
                 new ArrayList<>()
         );
     }
 
     public static LoginRequest buildLoginRequest(){
         return new LoginRequest(
-                "fedesan",
-                "1234"
+                "Fedesan1234",
+                "Fede12345"
         );
     }
+    public static SigninResponse buildSigninResponse(){
+        return new SigninResponse(
+                null,
+                "Fedesan1234"
 
+        );
+    }
+    public static NewUserRequest buildNewUserRequest(){
+        return new NewUserRequest(
+                "Fedesan1234",
+                "Fede12345"
+        );
+    }
 }

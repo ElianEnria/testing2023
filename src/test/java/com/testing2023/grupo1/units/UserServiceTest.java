@@ -1,7 +1,9 @@
 package com.testing2023.grupo1.units;
 
 import com.testing2023.grupo1.controller.requests.user.LoginRequest;
+import com.testing2023.grupo1.controller.requests.user.NewUserRequest;
 import com.testing2023.grupo1.controller.responses.user.LoginResponse;
+import com.testing2023.grupo1.controller.responses.user.SigninResponse;
 import com.testing2023.grupo1.entity.User;
 import com.testing2023.grupo1.repository.TaskRepository;
 import com.testing2023.grupo1.repository.UserRepository;
@@ -89,4 +91,11 @@ public class UserServiceTest {
         LoginResponse response = userService.login(sendedRequest);
         Assert.assertEquals(response, expectedResponse);
     }
-}
+    @Test
+    @DisplayName("Usario se loguea con contraseña erronea")
+
+    public void createUser(){
+        SigninResponse expectedResponse = buildSigninResponse();
+        NewUserRequest sendedRequest = buildNewUserRequest();
+
+    }}
