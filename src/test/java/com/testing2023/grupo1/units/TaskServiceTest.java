@@ -1,5 +1,6 @@
 package com.testing2023.grupo1.units;
 
+import com.testing2023.grupo1.entity.Task;
 import com.testing2023.grupo1.service.TaskService;
 import com.testing2023.grupo1.service.UserService;
 import org.junit.Test;
@@ -19,8 +20,19 @@ public class TaskServiceTest {
 
     @Test()
     @DisplayName("Se obtienen todas las tareas correctamente")
-    public void getTasks(){
+    public void getAllTasks(){
+        // Sujeto de prueba
+        List<Task> tasks = buildTasks();
+        List<TaskResponse> expectedResponse = buildTaskResponseList(tasks);
 
+        Mockito.when(taskRepository.findAll()).thenReturn(tasks);
+
+        // Actuar
+        List<TaskResponse> response = taskService.getAllTasks();
+
+        // Afirmar
+        Assertions.assertEquals(expectedResponse, response);
+        Mockito.verify(taskRepository, Mockito.times(1)).findAll();
     }
     @Test
     @DisplayName("Se crea una tarea correctamente")
