@@ -74,7 +74,7 @@ public class UserServiceTest {
         Long userId = null;
 
         Mockito.when(userRepository.findById(userId)).thenReturn(Optional.of(
-                new User("Fede12345", "Fede12345")
+                new User("Fedesan1234", "Fede12345")
         ));
 
         User response = userService.getUserById(userId);
@@ -91,7 +91,7 @@ public class UserServiceTest {
                 sendedRequest.getUsername(),
                 sendedRequest.getPassword()
         )).thenReturn(Optional.of(new User(
-                "Fede12345",
+                "Fedesan1234",
                 "Fede12345"
         )));
 
