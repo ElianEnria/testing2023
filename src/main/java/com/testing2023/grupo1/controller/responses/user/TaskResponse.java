@@ -1,5 +1,6 @@
 package com.testing2023.grupo1.controller.responses.user;
 
+import com.testing2023.grupo1.entity.Task;
 import com.testing2023.grupo1.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +20,8 @@ public class TaskResponse {
     private LocalDateTime dateTime;
     private String description;
     private Boolean isDone;
+
+
 
     @Override
     public boolean equals(Object o) {
