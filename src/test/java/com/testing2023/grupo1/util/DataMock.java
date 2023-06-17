@@ -63,6 +63,14 @@ public class DataMock {
                 "Fede12345"
         );
     }
+
+    public static LoginRequest buildLoginRequestWithBadCredentials(){
+        return new LoginRequest(
+                "Fedesan1234",
+                "Fede123"
+        );
+    }
+
     public static SigninResponse buildSigninResponse(){
         return new SigninResponse(
                 null,
@@ -80,29 +88,23 @@ public class DataMock {
     public static List<Task> buildTasks() {
         List<Task> tasks = new ArrayList<>();
 
-        Task task1 = new Task();
-        task1.setId(1L);
-        task1.setTitle("Task 1");
-        task1.setDateTime(LocalDateTime.now());
-        task1.setDescription("Description 1");
-        task1.setIsDone(false);
-        tasks.add(task1);
+        tasks.add (new Task(
+                "Task 1",
+                LocalDateTime.now(),
+                "Description 1"
+        ));
 
-        Task task2 = new Task();
-        task2.setId(2L);
-        task2.setTitle("Task 2");
-        task2.setDateTime(LocalDateTime.now());
-        task2.setDescription("Description 2");
-        task2.setIsDone(false);
-        tasks.add(task2);
+        tasks.add (new Task(
+                "Task 2",
+                LocalDateTime.now(),
+                "Description 2"
+        ));
 
-        Task task3 = new Task();
-        task3.setId(3L);
-        task3.setTitle("Task 3");
-        task3.setDateTime(LocalDateTime.now());
-        task3.setDescription("Description 3");
-        task3.setIsDone(false);
-        tasks.add(task3);
+        tasks.add (new Task(
+                "Task 3",
+                LocalDateTime.now(),
+                "Description 3"
+        ));
 
         return tasks;
     }
@@ -130,6 +132,37 @@ public class DataMock {
         request.setDescription("Task Description");
         request.setLoggedUserId(1L);
         return request;
+    }
+
+    public static NewTaskRequest buildNewTaskRequestWithDateError(){
+        return new NewTaskRequest(
+                "Task Title",
+                LocalDateTime.now(),
+                "Task description",
+                1L
+        );
+    }
+
+    public static NewTaskRequest buildNewTaskRequestWithoutTitle(){
+        return new NewTaskRequest(
+                "",
+                LocalDateTime.now().plusDays(1),
+                "Task description",
+                1L
+        );
+    }
+
+    public static NewTaskRequest buildNewTaskRequestWithoutDescription(){
+        return new NewTaskRequest(
+                "Task title",
+                LocalDateTime.now().plusDays(1),
+                "",
+                1L
+        );
+    }
+
+    public static NewUserRequest buildSigninUserRequest() {
+        return new NewUserRequest("TestUser222", "TestUser222");
     }
 
 }
