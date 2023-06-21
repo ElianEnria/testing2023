@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
@@ -85,7 +86,7 @@ public class UserService {
 
     private void validateUsername(NewUserRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
-            throw new RuntimeException("El usuario ingresado ya está registrado");
+            throw new ResponseStatusException(BAD_REQUEST, "El usuario ingresado ya está registrado");
         }
     }
 
